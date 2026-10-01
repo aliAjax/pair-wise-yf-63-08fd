@@ -4,5 +4,6 @@
   "randomize": "Randomize",
   "participants": "Participants",
   "audit": "Safety audit",
-  "pending": "Pending queue"
+  "pending": "Pending queue",
+  "strata": "Stratified block ledger · central record"
 }
