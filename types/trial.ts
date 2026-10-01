@@ -1,17 +1,36 @@
 export type TrialRole = 'investigator' | 'pharmacist' | 'monitor';
+export type AgeBand = '18-44' | '45-64' | '65+';
 export type Arm = 'A' | 'B';
-export type AuditAction = 'randomized' | 'unblinded' | 'pending-queued' | 'pending-committed' | 'duplicate-blocked';
+export type StratumStatus = 'open' | 'recalculating';
+export type AuditAction =
+  | 'randomized'
+  | 'unblinded'
+  | 'pending-queued'
+  | 'pending-committed'
+  | 'duplicate-blocked'
+  | 'allocation-blocked'
+  | 'stratum-recalculated';
 
 export interface Participant {
   id: string;
   participantNo: string;
   identityKey: string;
   site: string;
-  ageBand: '18-44' | '45-64' | '65+';
+  ageBand: AgeBand;
   status: 'randomized' | 'unblinded';
   sequence: number;
   arm?: Arm;
+  blockNo?: number;
   unblindedAt?: string;
+}
+
+export interface StratumRecord {
+  key: string;
+  site: string;
+  ageBand: AgeBand;
+  planned: number;
+  blockSize: number;
+  status: StratumStatus;
 }
 
 export interface AuditEntry {
@@ -34,6 +53,6 @@ export interface RandomizeInput {
   participantNo: string;
   identityKey: string;
   site: string;
-  ageBand: Participant['ageBand'];
+  ageBand: AgeBand;
   actor: string;
 }
